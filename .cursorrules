@@ -1,0 +1,26 @@
+# Cursor Rules for Rustlings Project
+
+## Error Message Handling
+
+When the user pastes compilation errors, test failures, or other error messages:
+
+1. **DO NOT directly modify the code** unless explicitly asked to do so
+2. **DO analyze and explain**:
+   - What the error means
+   - Why it's occurring
+   - What needs to be fixed
+   - Where the issue is located
+   - How to fix it (conceptually or step-by-step)
+
+## Code Modification Policy
+
+- Only modify code when the user explicitly requests it (e.g., "fix this", "modify the code", "implement this")
+- If the user asks "tell me what's wrong" or "explain this error", provide explanations only
+- Always respond in Chinese (Simplified) as per user preference
+
+## Rustlings Specific
+
+- These are learning exercises - explanations should be educational
+- Point out the learning concepts being tested
+- Help understand Rust concepts, not just fix errors
+
