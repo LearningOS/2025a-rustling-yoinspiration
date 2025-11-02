@@ -2,8 +2,6 @@
 	heap
 	This question requires you to implement a binary heap function
 */
-// I AM NOT DONE
-
 use std::cmp::Ord;
 use std::default::Default;
 
@@ -37,7 +35,33 @@ where
     }
 
     pub fn add(&mut self, value: T) {
-        //TODO
+        self.count += 1;
+        self.items.push(value);
+        self.heapify_up(self.count);
+    }
+
+    fn heapify_up(&mut self, mut idx: usize) {
+        while idx > 1 {
+            let parent = self.parent_idx(idx);
+            if (self.comparator)(&self.items[idx], &self.items[parent]) {
+                self.items.swap(idx, parent);
+                idx = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    fn heapify_down(&mut self, mut idx: usize) {
+        while self.children_present(idx) {
+            let smallest = self.smallest_child_idx(idx);
+            if (self.comparator)(&self.items[smallest], &self.items[idx]) {
+                self.items.swap(smallest, idx);
+                idx = smallest;
+            } else {
+                break;
+            }
+        }
     }
 
     fn parent_idx(&self, idx: usize) -> usize {
@@ -57,8 +81,18 @@ where
     }
 
     fn smallest_child_idx(&self, idx: usize) -> usize {
-        //TODO
-		0
+        let left = self.left_child_idx(idx);
+        let right = self.right_child_idx(idx);
+        
+        if right <= self.count {
+            if (self.comparator)(&self.items[left], &self.items[right]) {
+                left
+            } else {
+                right
+            }
+        } else {
+            left
+        }
     }
 }
 
@@ -84,8 +118,21 @@ where
     type Item = T;
 
     fn next(&mut self) -> Option<T> {
-        //TODO
-		None
+        if self.is_empty() {
+            return None;
+        }
+        
+        // Swap root with last element
+        self.items.swap(1, self.count);
+        let result = self.items.pop();
+        self.count -= 1;
+        
+        // Heapify down if we still have elements
+        if !self.is_empty() {
+            self.heapify_down(1);
+        }
+        
+        result
     }
 }
 
